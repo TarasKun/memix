@@ -2,7 +2,7 @@ import {supabase} from '@/supabaseClient';
 import {useLoadingStore} from '@/stores';
 import {useCollectionsStore} from "@/stores/useCollections";
 
-export const getCollections = async (key: string) => {
+export const getCollections = async () => {
     const { setLoading } = useLoadingStore.getState();
     const { setCollections } = useCollectionsStore.getState();
 
@@ -14,13 +14,13 @@ export const getCollections = async (key: string) => {
             .select('*')
 
         if (error) {
-            console.error(`Error ${key}:`, error);
+            console.error(`Error `, error);
             return null;
         }
 
         setCollections(data || null);
     } catch (err) {
-        console.error(`Error ${key}:`, err);
+        console.error(`Error `, err);
         return null;
     } finally {
         setLoading(false);
